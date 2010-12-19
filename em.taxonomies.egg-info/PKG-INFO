@@ -1,0 +1,24 @@
+Metadata-Version: 1.0
+Name: em.taxonomies
+Version: 1.0
+Summary: Taxonomy dictionaries for engagemedia.org
+Home-page: http://svn.plone.org/svn/collective/
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        1.0dev (unreleased)
+        -------------------
+        
+        - Initial release
+        
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python

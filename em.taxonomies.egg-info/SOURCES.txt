@@ -1,0 +1,17 @@
+README.txt
+setup.cfg
+setup.py
+em/__init__.py
+em.taxonomies.egg-info/PKG-INFO
+em.taxonomies.egg-info/SOURCES.txt
+em.taxonomies.egg-info/dependency_links.txt
+em.taxonomies.egg-info/entry_points.txt
+em.taxonomies.egg-info/namespace_packages.txt
+em.taxonomies.egg-info/not-zip-safe
+em.taxonomies.egg-info/paster_plugins.txt
+em.taxonomies.egg-info/requires.txt
+em.taxonomies.egg-info/top_level.txt
+em/taxonomies/__init__.py
+em/taxonomies/setuphandlers.py
+em/taxonomies/tests.py
+em/taxonomies/vocabs.py
