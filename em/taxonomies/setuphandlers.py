@@ -5,6 +5,9 @@ from em.taxonomies.config import TOPLEVEL_TAXONOMY_FOLDER , GENRE_FOLDER, CATEGO
 from Products.ATVocabularyManager.config import TOOL_NAME as ATVOCABULARYTOOL
 from plumi.app.translations import createTranslations, deleteTranslations
 
+from zope.i18nmessageid import MessageFactory
+_ = MessageFactory("plumi")
+
 def publishObject(wftool,obj):
     logger=logging.getLogger('plumi.app')
     try:
