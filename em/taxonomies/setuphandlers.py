@@ -111,7 +111,7 @@ def setupDocuments(self, logger):
         
         #XXX used to have a custom getFirstPublishedTransitionTime 
         #sort on reverse date order, using the first published time transition
-        sort_crit = fldr.addCriterion('modified',"ATSortCriterion")
+        sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
         sort_crit.setReversed(True)
 
         #make the folder published
@@ -149,7 +149,7 @@ def setupDocuments(self, logger):
         state_crit.setValue(['published','featured'])
         #sort on reverse date order
         #XXX old getfirstpublishedtransition time 
-        sort_crit = fldr.addCriterion('modified',"ATSortCriterion")
+        sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
         sort_crit.setReversed(True)
 
         #make the folder published.
@@ -195,7 +195,7 @@ def setupDocuments(self, logger):
             state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
             state_crit.setValue(['published','featured'])
             #sort on reverse date order
-            sort_crit = fldr.addCriterion('modified',"ATSortCriterion")
+            sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
             sort_crit.setReversed(True)
             #publish folder
             fldr.setLayout(layout_name)
@@ -238,7 +238,7 @@ def setupDocuments(self, logger):
         state_crit = fldr.addCriterion('review_state', 'ATSimpleStringCriterion')
         state_crit.setValue(['published','featured'])
         #sort on reverse date order
-        sort_crit = fldr.addCriterion('modified',"ATSortCriterion")
+        sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
         sort_crit.setReversed(True)
         #publish the folder
         fldr.setLayout(layout_name)
