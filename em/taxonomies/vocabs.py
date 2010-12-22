@@ -6,6 +6,7 @@ vocab_set = {}
 taxonomy_sub_folder={'topic':'video_categories','genre':'video_genre','callouts':'submission_categories','countries':'video_countries'}
 
 vocab_set['video_countries'] = (
+         ('XX', _(u'----------------')),
          ('XX', _('International')),
          ('BU', _('Bougainville')),
          ('TI', _('Tibet')),
@@ -57,7 +58,6 @@ vocab_set['video_countries'] = (
          ('NP', _(u'Nepal ')),
          ('PK', _(u'Pakistan')),
          ('LK', _(u'Sri Lanka ')),
-         ('XX',_(u'Other')),
         )
 
 vocab_set['video_categories'] = (
@@ -93,6 +93,7 @@ vocab_set['video_categories'] = (
          ('civillib',_(u'Civil Liberties')),
         )
 vocab_set['video_genre'] = (
+         ('none', _(u'----------------')),
          ('documentary', _(u'Documentary')),
          ('experimental', _(u'Experimental')),
          ('fiction', _(u'Fiction')),
@@ -101,6 +102,7 @@ vocab_set['video_genre'] = (
          ('newsreport', _(u'News Report')),
         )
 vocab_set['submission_categories'] = (
+         ('XX', _(u'----------------')),
          ('festival', _(u'Festival')),
          ('screening', _(u'Screening')),
          ('dvd', _(u'DVD')),
