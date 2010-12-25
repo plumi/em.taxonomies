@@ -6,7 +6,7 @@ vocab_set = {}
 taxonomy_sub_folder={'topic':'video_categories','genre':'video_genre','callouts':'submission_categories','countries':'video_countries'}
 
 vocab_set['video_countries'] = (
-         ('XX', _(u'----------------')),
+         ('OO', _(u'----------------')),
          ('XX', _('International')),
          ('BU', _('Bougainville')),
          ('TI', _('Tibet')),
