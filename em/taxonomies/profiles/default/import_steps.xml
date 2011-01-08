@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <import-steps>
-  <import-step id="plumi.app.various"
+  <import-step id="em.taxonomies.various"
                version="20101204-01"
                handler="em.taxonomies.setuphandlers.setupVarious"
                title="em.taxonomies: miscellaneous import steps">

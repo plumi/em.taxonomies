@@ -6,8 +6,7 @@ vocab_set = {}
 taxonomy_sub_folder={'topic':'video_categories','genre':'video_genre','callouts':'submission_categories','countries':'video_countries'}
 
 vocab_set['video_countries'] = (
-         ('OO', _(u'----------------')),
-         ('XX', _('International')),
+         ('XX', _('-- International --')),
          ('BU', _('Bougainville')),
          ('TI', _('Tibet')),
          ('AQ', _('Antarctica')),
@@ -93,7 +92,7 @@ vocab_set['video_categories'] = (
          ('civillib',_(u'Civil Liberties')),
         )
 vocab_set['video_genre'] = (
-         ('none', _(u'----------------')),
+         ('none', _(u'-- None --')),
          ('documentary', _(u'Documentary')),
          ('experimental', _(u'Experimental')),
          ('fiction', _(u'Fiction')),
