@@ -92,32 +92,35 @@ def setupDocuments(self, logger):
     #description string for new smart folders
     for vocab in vocabs['video_genre']:
         new_smart_fldr_id = vocab[0]
-        #make the new SmartFolder
-        genre_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=vocab[1])
-        fldr = getattr(genre_fldr,new_smart_fldr_id)
-         
-        # Filter results to Plumi Video
-        type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
-        #Have to use the name of the Title of the Type you want to filter.
-        type_criterion.setValue("Video")
-         
-        # Filter results to this individual genre
-        type_criterion = fldr.addCriterion('getGenre', 'ATSimpleStringCriterion' )
-        #match against the ID of the vocab term. see getGenre in content types 
-        type_criterion.setValue(vocab[0])
-        ## add criteria for showing only published videos
-        state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
-        state_crit.setValue(['published','featured'])
-        
-        #XXX used to have a custom getFirstPublishedTransitionTime 
-        #sort on reverse date order, using the first published time transition
-        sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
-        sort_crit.setReversed(True)
 
-        #make the folder published
-        fldr.setLayout(layout_name)
-        publishObject(wftool,fldr)
-        createTranslations(self,fldr)
+        #skip topic creation if id=None
+        if not new_smart_fldr_id == "none":
+            #make the new SmartFolder
+            genre_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=vocab[1])
+            fldr = getattr(genre_fldr,new_smart_fldr_id)
+             
+            # Filter results to Plumi Video
+            type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
+            #Have to use the name of the Title of the Type you want to filter.
+            type_criterion.setValue("Video")
+             
+            # Filter results to this individual genre
+            type_criterion = fldr.addCriterion('getGenre', 'ATSimpleStringCriterion' )
+            #match against the ID of the vocab term. see getGenre in content types 
+            type_criterion.setValue(vocab[0])
+            ## add criteria for showing only published videos
+            state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
+            state_crit.setValue(['published','featured'])
+            
+            #XXX used to have a custom getFirstPublishedTransitionTime 
+            #sort on reverse date order, using the first published time transition
+            sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
+            sort_crit.setReversed(True)
+
+            #make the folder published
+            fldr.setLayout(layout_name)
+            publishObject(wftool,fldr)
+            createTranslations(self,fldr)
 
     #
     # 2 of 4: video categories aka topic
@@ -130,32 +133,33 @@ def setupDocuments(self, logger):
 
     for vocab in vocabs['video_categories']:
         new_smart_fldr_id = vocab[0]
+        #skip topic creation if id=None
+        if not new_smart_fldr_id == "none":
+            #make the new SmartFolder
+            categ_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=vocab[1])
+            fldr = getattr(categ_fldr,new_smart_fldr_id)
 
-        #make the new SmartFolder
-        categ_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=vocab[1])
-        fldr = getattr(categ_fldr,new_smart_fldr_id)
+            # Filter results to Plumi Video
+            type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
+            type_criterion.setValue("Video")
+            # Filter results to this individual category
+            type_criterion = fldr.addCriterion('getCategories', 'ATListCriterion' )
+            #match against the ID of the vocab term. see getCategories in content objects
+            type_criterion.setValue(vocab[0])
+            #match if any vocab term is present in the video's selected categories
+            type_criterion.setOperator('or')
+            ## add criteria for showing only published videos
+            state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
+            state_crit.setValue(['published','featured'])
+            #sort on reverse date order
+            #XXX old getfirstpublishedtransition time 
+            sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
+            sort_crit.setReversed(True)
 
-        # Filter results to Plumi Video
-        type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
-        type_criterion.setValue("Video")
-        # Filter results to this individual category
-        type_criterion = fldr.addCriterion('getCategories', 'ATListCriterion' )
-        #match against the ID of the vocab term. see getCategories in content objects
-        type_criterion.setValue(vocab[0])
-        #match if any vocab term is present in the video's selected categories
-        type_criterion.setOperator('or')
-        ## add criteria for showing only published videos
-        state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
-        state_crit.setValue(['published','featured'])
-        #sort on reverse date order
-        #XXX old getfirstpublishedtransition time 
-        sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
-        sort_crit.setReversed(True)
-
-        #make the folder published.
-        fldr.setLayout(layout_name)
-        publishObject(wftool,fldr)
-        createTranslations(self,fldr)
+            #make the folder published.
+            fldr.setLayout(layout_name)
+            publishObject(wftool,fldr)
+            createTranslations(self,fldr)
 
 
     #
@@ -176,31 +180,33 @@ def setupDocuments(self, logger):
 
         # maybe it already exists?
         try: 
-            # make the new SmartFolder
-            countries_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=country[1]) 
-            fldr = getattr(countries_fldr,new_smart_fldr_id)
+            #skip topic creation if id=None
+            if not new_smart_fldr_id == "none":
+                # make the new SmartFolder
+                countries_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=country[1]) 
+                fldr = getattr(countries_fldr,new_smart_fldr_id)
 
-            # Filter results to  Plumi Video
-            type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
-            type_criterion.setValue("Video")
+                # Filter results to  Plumi Video
+                type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
+                type_criterion.setValue("Video")
 
-            # Filter results to this individual category
-            type_criterion = fldr.addCriterion('getCountries', 'ATListCriterion' )
-            #
-            #match against the ID of the vocab term. see getCategories in content objects
-            type_criterion.setValue(country[0])
-            #match if any vocab term is present in the video's selected categories
-            type_criterion.setOperator('or')
-            ## add criteria for showing only published videos
-            state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
-            state_crit.setValue(['published','featured'])
-            #sort on reverse date order
-            sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
-            sort_crit.setReversed(True)
-            #publish folder
-            fldr.setLayout(layout_name)
-            publishObject(wftool,fldr)
-            createTranslations(self,fldr)
+                # Filter results to this individual category
+                type_criterion = fldr.addCriterion('getCountries', 'ATListCriterion' )
+                #
+                #match against the ID of the vocab term. see getCategories in content objects
+                type_criterion.setValue(country[0])
+                #match if any vocab term is present in the video's selected categories
+                type_criterion.setOperator('or')
+                ## add criteria for showing only published videos
+                state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
+                state_crit.setValue(['published','featured'])
+                #sort on reverse date order
+                sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
+                sort_crit.setReversed(True)
+                #publish folder
+                fldr.setLayout(layout_name)
+                publishObject(wftool,fldr)
+                createTranslations(self,fldr)
         except:
             # should be ok from previous installation
             pass
@@ -218,32 +224,34 @@ def setupDocuments(self, logger):
     for submission_categ in vocabs['submission_categories']:
         new_smart_fldr_id = submission_categ[0]
 
-        #make the new SmartFolder
-        submissions_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=submission_categ[1])
-        fldr = getattr(submissions_fldr,new_smart_fldr_id)
-        # Filter results to Callouts
-        type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
-        #the title of the type, not the class name, or portal_type 
-        type_criterion.setValue("Plumi Call Out")
+        #skip topic creation if id=None
+        if not new_smart_fldr_id == "none":
+            #make the new SmartFolder
+            submissions_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=submission_categ[1])
+            fldr = getattr(submissions_fldr,new_smart_fldr_id)
+            # Filter results to Callouts
+            type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
+            #the title of the type, not the class name, or portal_type 
+            type_criterion.setValue("Plumi Call Out")
 
-        # Filter results to this individual category
-        type_criterion = fldr.addCriterion('getSubmissionCategories', 'ATListCriterion' )
-        #
-        #match against the ID of the vocab term. see getCategories in callout.py (Callout object)
-        type_criterion.setValue(submission_categ[0])
-        #match if any vocab term is present in the video's selected categories
-        type_criterion.setOperator('or')
+            # Filter results to this individual category
+            type_criterion = fldr.addCriterion('getSubmissionCategories', 'ATListCriterion' )
+            #
+            #match against the ID of the vocab term. see getCategories in callout.py (Callout object)
+            type_criterion.setValue(submission_categ[0])
+            #match if any vocab term is present in the video's selected categories
+            type_criterion.setOperator('or')
 
-        ## add criteria for showing only published callouts
-        state_crit = fldr.addCriterion('review_state', 'ATSimpleStringCriterion')
-        state_crit.setValue(['published','featured'])
-        #sort on reverse date order
-        sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
-        sort_crit.setReversed(True)
-        #publish the folder
-        fldr.setLayout(layout_name)
-        publishObject(wftool,fldr)
-        createTranslations(self,fldr)
+            ## add criteria for showing only published callouts
+            state_crit = fldr.addCriterion('review_state', 'ATSimpleStringCriterion')
+            state_crit.setValue(['published','featured'])
+            #sort on reverse date order
+            sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
+            sort_crit.setReversed(True)
+            #publish the folder
+            fldr.setLayout(layout_name)
+            publishObject(wftool,fldr)
+            createTranslations(self,fldr)
 
 def setupVarious(context):
 

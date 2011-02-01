@@ -101,7 +101,7 @@ vocab_set['video_genre'] = (
          ('newsreport', _(u'News Report')),
         )
 vocab_set['submission_categories'] = (
-         ('XX', _(u'----------------')),
+         ('none', _(u'----------------')),
          ('festival', _(u'Festival')),
          ('screening', _(u'Screening')),
          ('dvd', _(u'DVD')),
