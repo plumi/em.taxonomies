@@ -182,8 +182,12 @@ def setupDocuments(self, logger):
         try: 
             #skip topic creation if id=None
             if not new_smart_fldr_id == "none":
-                # make the new SmartFolder
-                countries_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=country[1]) 
+                # make the new SmartFolder              
+                if new_smart_fldr_id == 'XX':
+                    #International country has --International-- title to show first on drop down, we're overriding that
+                    countries_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title='International') 
+                else:
+                    countries_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=country[1]) 
                 fldr = getattr(countries_fldr,new_smart_fldr_id)
 
                 # Filter results to  Plumi Video
