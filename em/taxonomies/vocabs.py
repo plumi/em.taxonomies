@@ -27,6 +27,7 @@ vocab_set['video_countries'] = (
          ('FJ', _(u'Fiji')),
          ('PF', _(u'French Polynesia')),
          ('GU', _(u'Guam')),
+         ('HK', _(u'Hong Kong')),
          ('KI', _(u'Kiribati')),
          ('MH', _(u'Marshall Islands')),
          ('FM', _(u'Micronesia, Federated States Of ')),
