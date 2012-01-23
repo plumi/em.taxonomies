@@ -1,7 +1,7 @@
 import logging
 from Products.CMFCore.utils import getToolByName
 from em.taxonomies.vocabs  import vocab_set as vocabs
-from em.taxonomies.config import TOPLEVEL_TAXONOMY_FOLDER , GENRE_FOLDER, CATEGORIES_FOLDER, COUNTRIES_FOLDER, SUBMISSIONS_FOLDER, SE_ASIA_COUNTRIES
+from em.taxonomies.config import TOPLEVEL_TAXONOMY_FOLDER , GENRE_FOLDER, CATEGORIES_FOLDER, COUNTRIES_FOLDER, SUBMISSIONS_FOLDER, SE_ASIA_COUNTRIES, LANGUAGES_FOLDER
 from Products.ATVocabularyManager.config import TOOL_NAME as ATVOCABULARYTOOL
 from plumi.app.translations import createTranslations, deleteTranslations
 
@@ -82,7 +82,7 @@ def setupDocuments(self, logger):
 
 
     #
-    # 1 of 4: video genre
+    # 1 of 5: video genre
     #
     taxonomy_fldr.invokeFactory('Folder', id=GENRE_FOLDER, 
                                 title=_(u'Video Genres'))
@@ -123,7 +123,7 @@ def setupDocuments(self, logger):
             createTranslations(self,fldr)
 
     #
-    # 2 of 4: video categories aka topic
+    # 2 of 5: video categories aka topic
     #
     taxonomy_fldr.invokeFactory('Folder',id=CATEGORIES_FOLDER,
                                 title=_(u'Video Topics'))
@@ -163,7 +163,7 @@ def setupDocuments(self, logger):
 
 
     #
-    # 3 of 4: video countries
+    # 3 of 5: video countries
     #
    
     #Countries
@@ -216,7 +216,7 @@ def setupDocuments(self, logger):
             pass
 
     #
-    #4 of 4 : CallOut submission categories
+    #4 of 5 : CallOut submission categories
     #
     topic_description_string = "CallOuts for Topic - %s "
     taxonomy_fldr.invokeFactory('Folder',id=SUBMISSIONS_FOLDER,
@@ -256,6 +256,56 @@ def setupDocuments(self, logger):
             fldr.setLayout(layout_name)
             publishObject(wftool,fldr)
             createTranslations(self,fldr)
+
+    #
+    # 5 of 5: video languages
+    #
+   
+    #Languages
+    #get the languages from the languages vocab!
+
+    taxonomy_fldr.invokeFactory('Folder',id=LANGUAGES_FOLDER,
+                                title=_(u'Video Languages'))
+    languages_fldr = getattr(taxonomy_fldr,LANGUAGES_FOLDER,None)
+    publishObject(wftool,languages_fldr)
+    createTranslations(self,languages_fldr)
+
+    for language in vocabs['video_languages']:
+        new_smart_fldr_id = language[0]
+
+        # maybe it already exists?
+        try: 
+            #skip topic creation if id=None
+            if not new_smart_fldr_id == "none":
+                # make the new SmartFolder              
+                languages_fldr.invokeFactory('Topic', id=new_smart_fldr_id,title=language[1]) 
+                fldr = getattr(languages_fldr,new_smart_fldr_id)
+
+                # Filter results to  Plumi Video
+                type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
+                type_criterion.setValue("Video")
+
+                # Filter results to this individual category
+                type_criterion = fldr.addCriterion('getLanguages', 'ATListCriterion' )
+                #
+                #match against the ID of the vocab term. see getCategories in content objects
+                type_criterion.setValue(language[0])
+                #match if any vocab term is present in the video's selected categories
+                type_criterion.setOperator('or')
+                ## add criteria for showing only published videos
+                state_crit = fldr.addCriterion('review_state', 'ATListCriterion')
+                state_crit.setValue(['published','featured'])
+                #sort on reverse date order
+                sort_crit = fldr.addCriterion('effective',"ATSortCriterion")
+                sort_crit.setReversed(True)
+                #publish folder
+                fldr.setLayout(layout_name)
+                publishObject(wftool,fldr)
+                createTranslations(self,fldr)
+        except:
+            # should be ok from previous installation
+            pass
+
 
 def setupVarious(context):
 
