@@ -286,7 +286,7 @@ def setupDocuments(self, logger):
                 type_criterion.setValue("Video")
 
                 # Filter results to this individual category
-                type_criterion = fldr.addCriterion('getLanguages', 'ATListCriterion' )
+                type_criterion = fldr.addCriterion('getVideoLanguage', 'ATListCriterion' )
                 #
                 #match against the ID of the vocab term. see getCategories in content objects
                 type_criterion.setValue(language[0])
