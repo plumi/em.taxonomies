@@ -159,4 +159,13 @@ vocab_set['video_languages'] = (
         ('pt', _(u'Portugese ')),
         ('ru', _(u'Russian ')),
         ('es', _(u'Spanish ')),
+        ('ha', _(u'Halia ')),
+        ('pal', _(u'Palauan ')),
+        ('pas', _(u'Pashtu ')),
+        ('ch', _(u'Chammoro ')),
+        ('pi', _(u'Pitkern ')),
+        ('tok', _(u'Tokelauan ')),
+        ('ba', _(u'Bangla ')),
+        ('dz', _(u'Dzongkha ')),
+        ('dh', _(u'Dhivehi ')),
 )
