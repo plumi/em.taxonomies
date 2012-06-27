@@ -58,6 +58,7 @@ vocab_set['video_countries'] = (
          ('NP', _(u'Nepal ')),
          ('PK', _(u'Pakistan')),
          ('LK', _(u'Sri Lanka ')),
+         ('EG', _(u'Egypt ')),
         )
 
 vocab_set['video_categories'] = (
