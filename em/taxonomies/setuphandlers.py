@@ -102,7 +102,7 @@ def setupDocuments(self, logger):
             # Filter results to Plumi Video
             type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
             #Have to use the name of the Title of the Type you want to filter.
-            type_criterion.setValue("Video")
+            type_criterion.setValue(["Video", "External Video"])
              
             # Filter results to this individual genre
             type_criterion = fldr.addCriterion('getGenre', 'ATSimpleStringCriterion' )
@@ -141,7 +141,7 @@ def setupDocuments(self, logger):
 
             # Filter results to Plumi Video
             type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
-            type_criterion.setValue("Video")
+            type_criterion.setValue(["Video", "External Video"])
             # Filter results to this individual category
             type_criterion = fldr.addCriterion('getCategories', 'ATListCriterion' )
             #match against the ID of the vocab term. see getCategories in content objects
@@ -192,7 +192,7 @@ def setupDocuments(self, logger):
 
                 # Filter results to  Plumi Video
                 type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
-                type_criterion.setValue("Video")
+                type_criterion.setValue(["Video", "External Video"])
 
                 # Filter results to this individual category
                 type_criterion = fldr.addCriterion('getCountries', 'ATListCriterion' )
@@ -283,7 +283,7 @@ def setupDocuments(self, logger):
 
                 # Filter results to  Plumi Video
                 type_criterion = fldr.addCriterion('Type', 'ATPortalTypeCriterion' )
-                type_criterion.setValue("Video")
+                type_criterion.setValue(["Video", "External Video"])
 
                 # Filter results to this individual category
                 type_criterion = fldr.addCriterion('getVideoLanguage', 'ATListCriterion' )
